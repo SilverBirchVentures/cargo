@@ -7,7 +7,7 @@ Map queryMap(Map values, Map params) {
         var value = values[key];
     if (value is String) {
       try {
-        value = JSON.decode(value);
+        value = json.decode(value);
       } on FormatException  catch(e) {
         // not possible to parse the JSON 
       }

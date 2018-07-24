@@ -18,7 +18,7 @@ class LocalstorageCargo extends Cargo {
     key = "$collection$key";
     
     _checkDefault(key, defaultValue: defaultValue);
-    return values[key] is String ? JSON.decode(values[key]) : values[key];
+    return values[key] is String ? json.decode(values[key]) : values[key];
   }
 
   void _checkDefault(String key, {defaultValue}) {
@@ -44,7 +44,7 @@ class LocalstorageCargo extends Cargo {
   }
 
   void _setItem(String key, data) {
-    values[key] = JSON.encode(data);
+    values[key] = json.encode(data);
   }
 
   void add(String key, data) {
@@ -55,9 +55,9 @@ class LocalstorageCargo extends Cargo {
   void _add(String key, data) {
     List list = new List();
     if (values.containsKey(key)) {
-       Object obj = JSON.decode(values[key]);
+       Object obj = json.decode(values[key]);
        if (obj is List) {
-           list = JSON.decode(values[key]);
+           list = json.decode(values[key]);
        }
     }
     list.add(data);

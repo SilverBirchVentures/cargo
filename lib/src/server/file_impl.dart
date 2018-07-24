@@ -63,7 +63,7 @@ class FileCargo extends Cargo {
 
           if (file.existsSync()) {
             // need to convert it to json!
-            return JSON.decode(file.readAsStringSync());
+            return json.decode(file.readAsStringSync());
           }
      }
      _setDefaultValue(key, defaultValue);
@@ -84,8 +84,8 @@ class FileCargo extends Cargo {
           
           // create completer to close stream
           await for (String data in stream
-              .transform(UTF8.decoder))  {
-            result = JSON.decode(data);
+              .transform(utf8.decoder))  {
+            result = json.decode(data);
           } // output the data
       } else {
           _setDefaultValue(key, defaultValue);
@@ -161,7 +161,7 @@ class FileCargo extends Cargo {
   }
   
   void _writeFile(File file, data) {
-    file.writeAsStringSync(JSON.encode(data));
+    file.writeAsStringSync(json.encode(data));
   }
 
   void removeItem(String key) {
@@ -169,7 +169,7 @@ class FileCargo extends Cargo {
     var uriKey = new Uri.file("$pathToStore$encodedPath");
     var file = new File(uriKey.toFilePath());
 
-    file.delete().then((File file) {
+    file.delete().then((_) {
       dispatch_removed(key);
       log.info("item $key deleted successfully");
     });
@@ -271,8 +271,8 @@ class FileCargo extends Cargo {
         Stream stream = file.openRead();
               
         await for(String data in stream
-                  .transform(UTF8.decoder)) {
-                List dataKeys = JSON.decode(data); // output the data
+                  .transform(utf8.decoder)) {
+                List dataKeys = json.decode(data); // output the data
                 keys = dataKeys.toSet();
         }
     }
